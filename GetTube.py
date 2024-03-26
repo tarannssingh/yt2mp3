@@ -44,11 +44,11 @@ if PATH == "./music":
     
     # technology if we use youtube for link 
     t = v.streams.filter(only_audio=True).all()
-    t[0].download(PATH)
+    t[0].download(PATH, filename=f'{(v.title).replace(" ", "")}.mp4')
     os.chdir(f"{PATH}")
-    video = mp.AudioFileClip(f"{v.title}.mp4").set_duration(v.length) #.without_silence()
-    video = video.remove_dead_audio(min_silence_length=10, silence_thresh=-30) 
-    video.write_audiofile(f"{v.title}.mp3")
+    video = mp.AudioFileClip(f'{(v.title).replace(" ", "")}.mp4').set_duration(v.length) #.without_silence()
+    # video = video.remove_dead_audio(min_silence_length=10, silence_thresh=-30) 
+    video.write_audiofile(f'{v.title.replace(" ", "")}.mp3')
     # audio_path = os.path.join(PATH, f"{v.title}.mp3")  # Assuming you want to save as MP3
     
     os.chdir(os.path.join(os.curdir, ".."))
@@ -78,7 +78,6 @@ if PATH == "./videos":
     # print(f"{os.getcwd()}{PATH[1:]}/{v.title}.mp4")
 
 
-from pytube import Channel
 
 # Instantiate a Channel object with the YouTube channel URL
 # c = Channel("https://www.youtube.com/c/SidhuMooseWalaOfficial/videos")
